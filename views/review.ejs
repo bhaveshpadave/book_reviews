@@ -1,77 +1,90 @@
 <%- include('partials/header.ejs') %>
 <div class="col-md-10">
     <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="col-auto col-lg-3 d-flex justify-content-center">
-            <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-        </div>
-        <div class="col p-4 d-flex flex-column position-static">
-            <div class="d-flex">
-                <strong class="d-inline-block mb-2 text-primary-emphasis"><input type="text" id="editGenre" class="form-control" name="updatedGenre" value="<%= genre %>" autocomplete="off" autofocus="true" hidden="true"></strong>
-                <span id="existingGenre"><strong class="d-inline-block mb-2 text-primary-emphasis"><%= genre %></strong></span>
-                <button id="doneBtnGenre<%#item.id%>" class="edit btn" type="submit" hidden="true">
-                    <img class="icon" height="20px" src="/assets/icons/check-solid.svg" alt="tick image">
-                </button>
-                <button id="editBtnGenre<%#item.id%>" class="edit btn" onclick="handler('<%#item.id%>')" hidden="true">
-                    <img class="icon" height="20px" src="/assets/icons/pencil-solid.svg" alt="pencil image">
-                </button>
+        
+            <% if(book) { %>
+            <div>
+                <button id="editBtn" class="edit btn btn-link" onclick="handler()" >Edit</button>
             </div>
-            <div class="d-flex">
-                <form action="" method="post">
-                    <h3 class="mb-2 d-inline-block"><input type="text" id="editTitle" class="form-control" name="updatedTitle" value="<%= bookTitle %>" autocomplete="off" autofocus="true" hidden="true"></h3>
-                    <h3 class="mb-0" id="existingTitle"><%= bookTitle %></h3>
-                    <button id="doneBtnTitle<%#item.id%>" class="edit btn" type="submit" hidden="true">
+            <form action="/delete" method="post">
+                <div>
+                    <button id="deleteBtn" class="edit btn btn-link" onclick="handler()" >Edit</button>
+                </div>
+            </form>
+            <form action="/update" method="post">
+            <input type="hidden" name="bookId" value="<%= book.id %>" >
+            <div class="col-auto col-lg-3 d-flex justify-content-center">
+                <img src="https://covers.openlibrary.org/b/isbn/<%= book.isbn %>-M.jpg?default=false" alt="">
+                <!-- <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+            </div>
+            <div class="col p-4 d-flex flex-column position-static">
+                <div class="d-flex">
+                    <strong class="d-inline-block mb-2 text-primary-emphasis"><input type="text" id="editGenre" class="form-control" name="genre" value="<%= book.genre %>" autocomplete="off" autofocus="true" hidden="true"></strong>
+                    <span id="existingGenre"><strong class="d-inline-block mb-2 text-primary-emphasis"><%= book.genre %></strong></span>
+                    <button id="doneBtnGenre<%#item.id%>" class="edit btn" type="submit" hidden="true">
                         <img class="icon" height="20px" src="/assets/icons/check-solid.svg" alt="tick image">
                     </button>
-                </form>
-                <button id="editBtnTitle<%#item.id%>" class="edit btn" onclick="handler('<%#item.id%>')" hidden="true">
-                    <img class="icon" height="20px" src="/assets/icons/pencil-solid.svg" alt="pencil image">
-                </button>
-            </div>
-
-            <div class="mb-1 text-body-secondary">Reviewed on: <%= timestamp %></div>
-
-            <div class="d-flex">
-                <div class="mb-1 text-body-secondary" id="editRatings" hidden="true">How strongly I recommend: <input type="number" class="form-control" name="updatedRatings" value="<%= bookRatings %>" autocomplete="off" autofocus="true"></div>
-                <div class="mb-1 text-body-secondary" id="existingRatings">How strongly I recommend: <%= bookRatings %>/10</div>
-                <button id="doneBtnRatings<%#item.id%>" class="edit btn" type="submit" hidden="true">
-                    <img class="icon" height="20px" src="/assets/icons/check-solid.svg" alt="tick image">
-                </button>
-                <button id="editBtnRatings<%#item.id%>" class="edit btn" onclick="handler('<%#item.id%>')" hidden="true">
-                    <img class="icon" height="20px" src="/assets/icons/pencil-solid.svg" alt="pencil image">
-                </button>
-            </div>
-
-            <div class="">
-                <p class="card-text mb-auto"><textarea class="form-control" name="updatedDescription" id="editDescription" hidden="true"><%= bookDescription %></textarea></p>
-                <p class="card-text mb-auto" id="existingDescription"><%= bookDescription %></p>
-                <button id="doneBtnDescription<%#item.id%>" class="edit btn" type="submit" hidden="true">
-                    <img class="icon" height="20px" src="/assets/icons/check-solid.svg" alt="tick image">
-                </button>
-                <button id="editBtnDescription<%#item.id%>" class="edit btn" onclick="handler('<%#item.id%>')" hidden="true">
-                    <img class="icon" height="20px" src="/assets/icons/pencil-solid.svg" alt="pencil image">
-                </button>
-            </div>
-            
-        </div>
-        <div class="card">
-            <div class="d-flex">
-                <textarea class="form-control" name="updatedReview" id="editReview" hidden="true" rows="3"><%= bookReview %></textarea>
-                <div class="card-body" id="existingReview">
-                    <%= bookReview %>
+                    <button id="editBtnGenre<%#item.id%>" class="edit btn" onclick="handler('<%#item.id%>')" hidden="true">
+                        <img class="icon" height="20px" src="/assets/icons/pencil-solid.svg" alt="pencil image">
+                    </button>
                 </div>
-                <button id="doneBtnReview<%#item.id%>" class="edit btn" type="submit" hidden="true">
-                    <img class="icon" height="20px" src="/assets/icons/check-solid.svg" alt="tick image">
-                </button>
-                <button id="editBtnReview<%#item.id%>" class="edit btn" onclick="handler('<%#item.id%>')" hidden="true">
-                    <img class="icon" height="20px" src="/assets/icons/pencil-solid.svg" alt="pencil image">
-                </button>
+                <div class="d-flex">
+                        <h3 class="mb-2 d-inline-block"><input type="text" id="editTitle" class="form-control" name="title" value="<%= book.title %>" autocomplete="off" autofocus="true" hidden="true"></h3>
+                        <h3 class="mb-0" id="existingTitle"><%= book.title %></h3>
+                        <button id="doneBtnTitle<%#item.id%>" class="edit btn" type="submit" hidden="true">
+                            <img class="icon" height="20px" src="/assets/icons/check-solid.svg" alt="tick image">
+                        </button>
+                    <button id="editBtnTitle<%#item.id%>" class="edit btn" onclick="handler('<%#item.id%>')" hidden="true">
+                        <img class="icon" height="20px" src="/assets/icons/pencil-solid.svg" alt="pencil image">
+                    </button>
+                </div>
+    
+                <div class="mb-1 text-body-secondary">Reviewed on: <%= book.created_on %></div>
+    
+                <div class="d-flex">
+                    <div class="mb-1 text-body-secondary" id="editRatings" hidden="true">How strongly I recommend: <input type="number" class="form-control" name="rating" value="<%= book.rating %>" autocomplete="off" autofocus="true"></div>
+                    <div class="mb-1 text-body-secondary" id="existingRatings">How strongly I recommend: <%= book.rating %>/10</div>
+                    <button id="doneBtnRatings<%#item.id%>" class="edit btn" type="submit" hidden="true">
+                        <img class="icon" height="20px" src="/assets/icons/check-solid.svg" alt="tick image">
+                    </button>
+                    <button id="editBtnRatings<%#item.id%>" class="edit btn" onclick="handler('<%#item.id%>')" hidden="true">
+                        <img class="icon" height="20px" src="/assets/icons/pencil-solid.svg" alt="pencil image">
+                    </button>
+                </div>
+    
+                <div class="">
+                    <p class="card-text mb-auto"><textarea class="form-control" name="description" id="editDescription" hidden="true"><%= book.description %></textarea></p>
+                    <p class="card-text mb-auto" id="existingDescription"><%= book.description %></p>
+                    <button id="doneBtnDescription<%#item.id%>" class="edit btn" type="submit" hidden="true">
+                        <img class="icon" height="20px" src="/assets/icons/check-solid.svg" alt="tick image">
+                    </button>
+                    <button id="editBtnDescription<%#item.id%>" class="edit btn" onclick="handler('<%#item.id%>')" hidden="true">
+                        <img class="icon" height="20px" src="/assets/icons/pencil-solid.svg" alt="pencil image">
+                    </button>
+                </div>
+                
             </div>
-        </div>          
+            <div class="card">
+                <div class="d-flex">
+                    <textarea class="form-control" name="note" id="editReview" hidden="true" rows="3"><%= book.note %></textarea>
+                    <div class="card-body" id="existingReview">
+                        <%= book.note %>
+                    </div>
+                    <button id="doneBtnReview<%#item.id%>" class="edit btn" type="submit" hidden="true">
+                        <img class="icon" height="20px" src="/assets/icons/check-solid.svg" alt="tick image">
+                    </button>
+                    <button id="editBtnReview<%#item.id%>" class="edit btn" onclick="handler('<%#item.id%>')" hidden="true">
+                        <img class="icon" height="20px" src="/assets/icons/pencil-solid.svg" alt="pencil image">
+                    </button>
+                </div>
+            </div>
+            <% } %>
+        </form>          
     </div>        
 </div>
 
 <script>
-    function handler(params) {
+    function handler() {
         document.getElementById("editGenre").removeAttribute("hidden");
         document.getElementById("doneBtnGenre").removeAttribute("hidden");
         document.getElementById("existingGenre").setAttribute("hidden", true);
@@ -96,6 +109,8 @@
         document.getElementById("doneBtnReview").removeAttribute("hidden");
         document.getElementById("existingReview").setAttribute("hidden", true);
         document.getElementById("editBtnReview").setAttribute("hidden", true);
+
+        document.getElementById("deleteBtn").removeAttribute("hidden");
 
     }
 </script>

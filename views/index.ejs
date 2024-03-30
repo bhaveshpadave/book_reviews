@@ -1,5 +1,14 @@
 <%- include('partials/header.ejs') %>
     <% for(let book of bookInfo){%>
+        <p class="lead mb-0">Sort by
+            <!-- <a href="#" class="text-body-emphasis fw-bold">Continue reading...</a> -->
+            <form action="/ratings" method="post">
+                <button name="ratings" value="ratings" type="submit">Ratings</button>
+            </form>
+            <form action="/latest" method="post">
+                <button name="latest" value="latest" type="submit">Latest</button>
+            </form>
+        </p>
         <div class="col-md-10">
             <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                 <div class="col-auto col-lg-3 d-flex justify-content-center">
@@ -8,11 +17,11 @@
                 <div class="col p-4 d-flex flex-column position-static">
                     <strong class="d-inline-block mb-2 text-primary-emphasis"><%= book.genre %></strong>
                     <h3 class="mb-0"><%= book.title %></h3>
-                    <div class="mb-1 text-body-secondary">Reviewed on: <%= new Date().getDate(), new Date().getMonth() %></div>
-                    <div class="mb-1 text-body-secondary">How strongly I recommend: <%= book.ratings %></div>
+                    <div class="mb-1 text-body-secondary">Reviewed on: <%= book.created_on %></div>
+                    <div class="mb-1 text-body-secondary">How strongly I recommend: <%= book.rating %>/10</div>
                     <p class="card-text mb-auto"><%= book.description %></p>
                     <form action="/review" id="myNotes" method="post">
-                        <button type="submit" name="reviewId" value="<%# review.id> %>" class="btn btn-link icon-link gap-1 icon-link-hover">My notes</button>
+                        <button type="submit" name="noteId" value="<%= book.id %>" class="btn btn-link icon-link gap-1 icon-link-hover">My notes</button>
                     </form>
                 </div>
             </div>

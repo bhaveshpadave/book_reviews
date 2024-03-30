@@ -20,29 +20,31 @@ bookReview:
 -->
 
 <div class="col-lg-4">
-    <div class="align-self-center">
-        <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Title" name="bookTitle" id="">
+    <form action="/new" method="post">
+        <div class="align-self-center">
+            <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Title" name="title" id="">
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" placeholder="ISBN" name="isbn" id="">
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Genre" name="genre" id="">
+            </div>
+            <div class="mb-3">
+                <textarea class="form-control" placeholder="About book" name="description" id="" ></textarea>
+            </div>
+            <div class="mb-3">
+                <input type="number" class="form-control" placeholder="Ratings out of 10" min="1" max="10" name="rating" id="">
+            </div>
+            <div class="mb-3">
+                <textarea class="form-control" placeholder="Write a notes" name="note" id="" ></textarea>
+            </div>
+            <div>
+                <button class="btn btn-std" type="submit">Submit</button>
+            </div>
         </div>
-        <div class="mb-3">
-            <input type="text" class="form-control" placeholder="ISBN" name="bookIsbn" id="">
-        </div>
-        <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Genre" name="bookGenre" id="">
-        </div>
-        <div class="mb-3">
-            <textarea class="form-control" placeholder="About book" name="bookDescription" id="" ></textarea>
-        </div>
-        <div class="mb-3">
-            <input type="number" class="form-control" placeholder="Ratings out of 10" min="1" max="10" name="bookRatings" id="">
-        </div>
-        <div class="mb-3">
-            <textarea class="form-control" placeholder="Write a notes" name="bookNotes" id="" ></textarea>
-        </div>
-        <div>
-            <button class="btn btn-std" type="submit">Submit</button>
-        </div>
-    </div>
+    </form>
 </div>
 
 
