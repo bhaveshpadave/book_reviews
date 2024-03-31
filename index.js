@@ -177,15 +177,15 @@ app.post("/update", async (req, res) => {
 })
 
 // Deleting existing book
-app.delete("/delete", async (req, res) => {
+app.post("/delete", async (req, res) => {
     console.log(req.body);
-    // try {
-    //     await db.query("DELETE FROM reviews WHERE book_id = $1", [req.body.id]);
-    //     res.redirect("/");
-    // } catch (error) {
-    //     console.log(error);
-    //     res.status(201).redirect("/");
-    // }
+    try {
+        await db.query("DELETE FROM reviews WHERE book_id = $1", [req.body.deleteBtn]);
+        res.redirect("/");
+    } catch (error) {
+        console.log(error);
+        res.status(201).redirect("/");
+    }
 })
 
 

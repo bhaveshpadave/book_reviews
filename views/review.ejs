@@ -8,7 +8,7 @@
             </div>
             <form action="/delete" method="post">
                 <div>
-                    <button id="deleteBtn" class="edit btn btn-link" onclick="handler()" >Edit</button>
+                    <button name="deleteBtn" value="<%= book.id %>" class="edit btn btn-link" >Delete</button>
                 </div>
             </form>
             <form action="/update" method="post">
