@@ -1,44 +1,25 @@
 <%- include('partials/header.ejs') %>
-
-<!-- <div class="row g-3">
-    <div class="col-auto">
-        <label for="exampleFormControlInput1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-    </div>
-    <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-    </div>
-</div> 
-mainTitle: "Welcome to Book review blog",
-genre: "Self-help",
-bookTitle: "Best book of millennial",
-timestamp: "Nov 12",
-bookDescription: "This is a wider card with supporting text below as a natural lead-in to additional content.",
-bookRatings: "9/10",
-bookReview: 
--->
-
+</div>
 <div class="col-lg-4">
     <form action="/new" method="post">
         <div class="align-self-center">
             <div class="mb-3">
-                <input type="text" class="form-control" placeholder="Title" name="title" id="">
+                <input type="text" class="" placeholder="Title" name="title" id="" required>
             </div>
             <div class="mb-3">
-                <input type="text" class="form-control" placeholder="ISBN" name="isbn" id="">
+                <input type="text" class="" placeholder="ISBN" name="isbn" id="" required>
             </div>
             <div class="mb-3">
-                <input type="text" class="form-control" placeholder="Genre" name="genre" id="">
+                <input type="text" class="" placeholder="Genre" name="genre" id="">
             </div>
             <div class="mb-3">
-                <textarea class="form-control" placeholder="About book" name="description" id="" ></textarea>
+                <textarea class="" placeholder="About book" name="description" id="" ></textarea>
             </div>
             <div class="mb-3">
-                <input type="number" class="form-control" placeholder="Ratings out of 10" min="1" max="10" name="rating" id="">
+                <input type="number" class="" placeholder="Ratings out of 10" min="1" max="10" name="rating" id="" required>
             </div>
             <div class="mb-3">
-                <textarea class="form-control" placeholder="Write a notes" name="note" id="" ></textarea>
+                <textarea class="" placeholder="Write a notes" name="note" id="" ></textarea>
             </div>
             <div>
                 <button class="btn btn-std" type="submit">Submit</button>
@@ -46,9 +27,5 @@ bookReview:
         </div>
     </form>
 </div>
-
-
-
-
 
 <%- include('partials/footer.ejs') %>
