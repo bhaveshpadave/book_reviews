@@ -80,7 +80,15 @@
                             <img class="icon" height="20px" src="/assets/icons/check-solid.svg" alt="tick image">
                         </button>
                         <p class="card-text mb-auto"><textarea class="" name="description" id="editDescription" rows="5" hidden="true"><%= book.description %></textarea></p>
-                        <p class="card-text mb-auto" id="existingDescription"><%= book.description %></p>
+                            <% if (book.description) { %>
+                                    <p class="card-text mb-auto" id="existingDescription1">
+                                        <%= book.description.substring(0,400) %>...
+                                    </p>
+                                    <p class="card-text mb-auto" id="existingDescription2" hidden="true">
+                                        <%= book.description %>
+                                    </p>
+                                    <a href="#existingDescription2" onclick="readMore()" id="readMoreBtn">Read more</a>
+                            <% } %>
                     </form>
                 </div>
             </div>
@@ -159,6 +167,22 @@
         document.getElementById("deleteBtn").removeAttribute("hidden");
         document.getElementById("editBtn").setAttribute("hidden", true);
     }
+
+    function readMore() { 
+    const para1 = document.getElementById('existingDescription1'); 
+    const para2 = document.getElementById('existingDescription2');
+    const btn = document.getElementById('readMoreBtn');
+    
+    if (para2.getAttribute("hidden")) {
+        para1.setAttribute("hidden", true);
+        para2.removeAttribute("hidden");
+        btn.innerHTML = "Read less";
+    } else {
+        para2.setAttribute("hidden", true);
+        para1.removeAttribute("hidden");
+        btn.innerHTML = "Read more";
+    }
+}
 </script>
 
 <%- include('partials/footer.ejs') %>

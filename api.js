@@ -1,13 +1,17 @@
 import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
+import env from "dotenv";
+import bcrypt from "bcrypt";
+
+env.config();
 
 const db = new pg.Client({
-    user: "postgres",
-    database: "book_review",
-    port: 5432,
-    host: "localhost",
-    password: "root"
+    user: process.env.DB_USER || process.env.POSTGRES_USER,
+    database: process.env.DB_NAME || process.env.POSTGRES_NAME,
+    port: process.env.PORT,
+    host: process.env.DB_HOST || process.env.POSTGRES_HOST,
+    password: process.env.DB_PASSWORD || process.env.POSTGRES_PASSWORD
 })
 
 db.connect();
@@ -87,7 +91,7 @@ app.get("/books/sort?", async (req, res) => {
     if(sortBy === "ratings"){
         const data = await getBookInfo('reviews.rating');
         res.json(data);       
-    }else if (sortBy === "latest"){
+    } else if (sortBy === "latest"){
         const data = await getBookInfo('reviews.created_on');
         res.json(data);    
     }
@@ -99,9 +103,10 @@ app.get("/books/sort?", async (req, res) => {
 // Inserting values into database
 app.post("/books/new", async (req, res) => {
     const result = req.body;
-    const bookData = await db.query("SELECT * FROM books;");
+    const bookData = await db.query("SELECT * FROM books ORDER BY id ASC;");
     const booksArray = bookData.rows;
     let newBookId = parseInt(booksArray[booksArray.length-1].id)+1;
+    console.log(bookData.rows);
     try {
         if(result.title){
             await db.query(

@@ -1,6 +1,10 @@
 import express from "express";
 import bodyParser from "body-parser";
 import axios from "axios";
+import session from "express-session";
+import passport from "passport";
+import GoogleStrategy from "passport-google-oauth";
+
 
 const app = express();
 const PORT = 3000;
@@ -10,6 +14,15 @@ app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use(session({
+    secret: "THESECRETKEY",
+    resave: false,
+    saveUninitialized: true
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Show all records from books API
 app.get("/", async (req, res) => {

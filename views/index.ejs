@@ -24,8 +24,8 @@
                 <div class="mb-1"><small>How strongly I recommend: <%= book.rating %>/10</small></div>
                 <p class="card-text mb-auto">
                     <% if (book.description) { %>
-                        <% if (book.description.length > 250) {%> 
-                            <%= book.description.substring(0,250) %>...
+                        <% if (book.description.length > 400) {%> 
+                            <%= book.description.substring(0,400) %>...
                         <% } else { %>
                             <%= book.description %>
                         <% } %>

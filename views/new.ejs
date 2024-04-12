@@ -1,6 +1,6 @@
 <%- include('partials/header.ejs') %>
 </div>
-<div class="col-lg-4">
+<div class="col-lg-6">
     <form action="/new" method="post">
         <div class="align-self-center">
             <div class="mb-3">
@@ -9,6 +9,9 @@
             <div class="mb-3">
                 <input type="text" class="" placeholder="ISBN" name="isbn" id="" required>
             </div>
+            <small class="mb-3">
+                To get the ISBN of the book, search your book on <a href="https://openlibrary.org/" target="_blank">"https://openlibrary.org/"</a> and find ISBN 10 
+            </small>
             <div class="mb-3">
                 <input type="text" class="" placeholder="Genre" name="genre" id="">
             </div>
